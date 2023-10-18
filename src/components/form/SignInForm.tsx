@@ -13,6 +13,7 @@ import {signIn} from "next-auth/react";
 import {useRouter} from "next/navigation";
 import {useToast} from "@/components/ui/use-toast";
 import {GoogleSignIn} from "@/components/GoogleSignIn";
+import {SteamSignIn} from "@/components/SteamSignIn";
 
 const formSchema = z.object({
     email: z.string().min(1, 'Email is required').email(),
@@ -87,6 +88,7 @@ export default function SignInForm() {
                 <Button className='w-full mt-6' type='submit'>Sign In</Button>
             </form>
             <GoogleSignIn> Sign in with Google </GoogleSignIn>
+            <SteamSignIn> Sign in with Steam </SteamSignIn>
 
 
             <p className="mt-3 text-center text-sm text-gray-500">

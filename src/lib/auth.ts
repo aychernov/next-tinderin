@@ -15,6 +15,24 @@ export const authOptions: NextAuthOptions = {
         signIn: '/sign-in',
     },
     providers: [
+        //@ts-ignore
+        {
+            id: "steam",
+            name: "Steam",
+            type: "oauth",
+            clientSecret: process.env.STEAM_SECRET,
+            clientId: process.env.STEAM_CLIENT_ID,
+            authorization: {
+                url: "https://steamcommunity.com/openid/login",
+                params: {
+                    "openid.ns": "http://specs.openid.net/auth/2.0",
+                    "openid.mode": "checkid_setup",
+                    "openid.return_to": `${process.env.NEXTAUTH_URL}/api/v1/auth/callback/steam`,
+                    "openid.realm": `${process.env.NEXTAUTH_URL}`,
+                    "openid.identity": "http://specs.openid.net/auth/2.0/identifier_select",
+                    "openid.claimed_id": "http://specs.openid.net/auth/2.0/identifier_select",
+                }
+            }},
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID!,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET!
