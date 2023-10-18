@@ -24,11 +24,11 @@ export const Todos = () => {
         }
     };
 
-    const handleDeleteTodo = (id) => {
+    const handleDeleteTodo = (id: number) => {
         setTodos(todos.filter((todo) => todo.id !== id));
     };
 
-    const handleToggleTodo = (id) => {
+    const handleToggleTodo = (id: number) => {
         setTodos(
             todos.map((todo) =>
                 todo.id === id ? {...todo, completed: !todo.completed} : todo
