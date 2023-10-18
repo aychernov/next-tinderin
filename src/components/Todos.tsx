@@ -1,6 +1,7 @@
 'use client'
 
 import {useEffect, useRef, useState} from "react";
+import Icon from "@/components/ui/Icon";
 
 type Todo = {
     id: number;
@@ -34,6 +35,10 @@ export const Todos = () => {
                 todo.id === id ? {...todo, completed: !todo.completed} : todo
             )
         );
+    };
+
+    const handleCopyText = (text: string): void => {
+        navigator.clipboard.writeText(text);
     };
 
     useEffect(() => {
@@ -99,6 +104,12 @@ export const Todos = () => {
                                 onChange={() => handleToggleTodo(todo.id)}
                             />
                             <span className="ml-2">{todo.text}</span>
+                            <button
+                                className=" ml-2 py-1 px-1 rounded"
+                                onClick={() => handleCopyText(todo.text)}
+                            >
+                                <Icon name='copy' width={24} height={24}></Icon>
+                            </button>
                         </label>
                         <button
                             className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
