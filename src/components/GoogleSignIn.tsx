@@ -1,5 +1,6 @@
 import {Button} from "@/components/ui/button";
 import {FC} from "react";
+import {signIn} from "next-auth/react";
 
 interface IGoogleSignInProps {
     children: React.ReactNode
@@ -8,7 +9,7 @@ export const GoogleSignIn: FC<IGoogleSignInProps> = ({children}) => {
 
 
  const loginWithGoogle = () => {
-  console.log('Login google')
+  signIn('google', {callbackUrl: 'http://localhost:3000/admin'})
  }
 
 

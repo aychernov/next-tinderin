@@ -4,7 +4,6 @@ import '@/styles/globals.css'
 import {NavBar} from "@/components/NavBar";
 import {Toaster} from "@/components/ui/toaster";
 import {AuthProviderSession} from "@/components/SessionProvider";
-import {ThemeProvider} from '@/components/ThemeProvider';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,20 +21,19 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
       <AuthProviderSession>
-          <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-          >
+          {/*<ThemeProvider*/}
+          {/*    attribute="class"*/}
+          {/*    defaultTheme="system"*/}
+          {/*    enableSystem*/}
+          {/*    disableTransitionOnChange*/}
+          {/*>*/}
           <main className='h-screen flex flex-col justify-center items-center'>
               <NavBar/>
               {children}
           </main>
-              </ThemeProvider>
+              {/*</ThemeProvider>*/}
           <Toaster/>
       </AuthProviderSession>
-
       </body>
     </html>
   )

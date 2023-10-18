@@ -1,5 +1,6 @@
-import {NextAuthOptions} from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import {NextAuthOptions} from 'next-auth';
+import GoogleProvider from "next-auth/providers/google";
 import {PrismaAdapter} from "@next-auth/prisma-adapter";
 import {db} from "@/lib/db";
 import {compare} from "bcrypt";
@@ -14,6 +15,10 @@ export const authOptions: NextAuthOptions = {
         signIn: '/sign-in',
     },
     providers: [
+        GoogleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID!,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET!
+        }),
         CredentialsProvider({
             name: "Credentials",
             credentials: {
@@ -35,9 +40,11 @@ export const authOptions: NextAuthOptions = {
                     return null
                 }
 
-                const passwordMatch = await compare(credentials.password, existingUser.password)
-                if (!passwordMatch) {
-                    return null
+                if (existingUser.password) {
+                    const passwordMatch = await compare(credentials.password, existingUser.password)
+                    if (!passwordMatch) {
+                        return null
+                    }
                 }
 
                 return {
@@ -49,8 +56,8 @@ export const authOptions: NextAuthOptions = {
         })
     ],
     callbacks: {
-        async jwt ({token, user}) {
-            console.log("JWT: ",token, user)
+        async jwt({token, user}) {
+            console.log("JWT: ", token, user)
             if (user) {
                 return {
                     ...token,
@@ -59,13 +66,14 @@ export const authOptions: NextAuthOptions = {
             }
             return token
         },
-        async session ({session, token}) {
-            console.log("SESSION: ",session, token)
+        async session({session, token}) {
+            console.log("SESSION: ", session, token)
             return {
                 ...session,
                 user: {
                     ...session.user,
                     username: token.username
+
                 }
             }
         },

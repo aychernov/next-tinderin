@@ -12,6 +12,7 @@ import Link from "next/link";
 import {signIn} from "next-auth/react";
 import {useRouter} from "next/navigation";
 import {useToast} from "@/components/ui/use-toast";
+import {GoogleSignIn} from "@/components/GoogleSignIn";
 
 const formSchema = z.object({
     email: z.string().min(1, 'Email is required').email(),
@@ -85,6 +86,8 @@ export default function SignInForm() {
                 </div>
                 <Button className='w-full mt-6' type='submit'>Sign In</Button>
             </form>
+            <GoogleSignIn> Sign in with Google </GoogleSignIn>
+
 
             <p className="mt-3 text-center text-sm text-gray-500">
                 Don`t have an account?
