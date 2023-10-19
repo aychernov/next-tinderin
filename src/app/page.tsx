@@ -11,7 +11,7 @@ export default async function Home() {
         <h1 className='text-xl'>Home page</h1>
             <div className='flex gap-2'>
                 <Link href='/admin' className={buttonVariants()}> Open Admin page </Link>
-
+                <Link href='/cars' className={buttonVariants()}> Open Cars page </Link>
                 <Link href='/todo' className={buttonVariants()}> Open Todo page </Link>
             </div>
 
